@@ -5,7 +5,7 @@ import re
 df = pd.read_csv('IMDB_Dataset.csv')
 
 # Mapping labels to numerical values
-df['label'] = df['label'].map({'positive': 1, 'negative': 0})
+df['sentiment'] = df['sentiment'].map({'positive': 1, 'negative': 0})
 
 # Remove <br /><br /> from reviews using regular expression
 df['review'] = df['review'].apply(lambda x: re.sub(r'<br /><br />', '', x))
