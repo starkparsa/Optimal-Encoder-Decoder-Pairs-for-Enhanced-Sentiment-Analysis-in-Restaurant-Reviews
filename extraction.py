@@ -10,8 +10,8 @@ df['sentiment'] = df['sentiment'].map({'positive': 1, 'negative': 0})
 # Remove <br /><br /> from reviews using regular expression
 df['review'] = df['review'].apply(lambda x: re.sub(r'<br /><br />', '', x))
 
-# Save the processed data to a new CSV file
-df.to_csv('processed_IMDB_Dataset.csv', index=False)
+# Save the processed data to a pickle file
+df.to_pickle('processed_IMDB_Dataset.pkl')
 
 # Display the first few rows of the processed dataset
 print(df.head())
