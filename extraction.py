@@ -14,7 +14,7 @@ df['review'] = df['review'].apply(lambda x: re.sub(r'<br /><br />', '', x))
 df = df.sample(frac=1).reset_index(drop=True)
 
 # Save the processed data to a pickle file
-df.to_pickle('processed_IMDB_Dataset.pkl')
+df.to_pickle('data/processed_IMDB_Dataset.pkl')
 
 # Display the first few rows of the processed dataset
 print(df.head())

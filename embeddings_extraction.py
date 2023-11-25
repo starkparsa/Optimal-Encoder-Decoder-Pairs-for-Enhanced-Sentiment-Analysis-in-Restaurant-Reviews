@@ -1,12 +1,12 @@
 import pandas as pd
 import re
-from BERT import BertEmbedder
+from encoders.BERT import BertEmbedder
 
 
 import pandas as pd
 
 # Replace 'path_to_file' with the actual path to your file
-file_path = 'processed_IMDB_Dataset.pkl'
+file_path = 'data/processed_IMDB_Dataset.pkl'
 
 # Read the pickle file into a DataFrame
 df = pd.read_pickle(file_path)
@@ -22,7 +22,7 @@ bert_embedder = BertEmbedder()
 df['bert_embeddings'] = df['review'].apply(bert_embedder.get_embeddings)
 
 # Save the processed data to a pickle file
-df.to_pickle('BERT_base_uncased_IMDB_Embeddings.pkl')
+df.to_pickle('embddings/BERT_base_uncased_IMDB_Embeddings.pkl')
 
 # Display the first few rows of the processed dataset
 print(df.head())
