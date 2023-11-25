@@ -2,7 +2,7 @@ import pandas as pd
 import re
 
 # Load the dataset
-df = pd.read_csv('IMDB_Dataset.csv')
+df = pd.read_csv('data/IMDB_Dataset.csv')
 
 # Mapping labels to numerical values
 df['sentiment'] = df['sentiment'].map({'positive': 1, 'negative': 0})
