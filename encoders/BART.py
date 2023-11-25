@@ -1,10 +1,10 @@
 import torch
-from transformers import BertTokenizer, BertModel
+from transformers import BartTokenizer, BartModel
 
-class BertEmbedder:
+class BartEmbedder:
     def __init__(self):
-        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-        self.model = BertModel.from_pretrained('bert-base-uncased')
+        self.tokenizer = BartTokenizer.from_pretrained('facebook/bart-large')
+        self.model = BartModel.from_pretrained('facebook/bart-large')
         self.model.eval()  # Set the model to evaluation mode
 
     def get_embeddings(self, sentence):

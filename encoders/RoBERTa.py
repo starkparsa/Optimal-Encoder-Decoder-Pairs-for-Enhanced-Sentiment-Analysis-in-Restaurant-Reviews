@@ -1,10 +1,10 @@
 import torch
 from transformers import BertTokenizer, BertModel
 
-class BertEmbedder:
+class RobertaEmbedder:
     def __init__(self):
-        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-        self.model = BertModel.from_pretrained('bert-base-uncased')
+        self.tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
+        self.model = RobertaModel.from_pretrained('roberta-base')
         self.model.eval()  # Set the model to evaluation mode
 
     def get_embeddings(self, sentence):
