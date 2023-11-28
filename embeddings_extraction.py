@@ -5,7 +5,6 @@ from encoders.RoBERTa import RobertaEmbedder
 from encoders.BART import BartEmbedder
 from encoders.word2vec import Word2VecEmbedder
 
-import pandas as pd
 
 
 
