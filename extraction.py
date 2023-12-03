@@ -1,27 +1,39 @@
 import pandas as pd
-import re
 
 # Load the dataset
-df = pd.read_csv('data/IMDB_Dataset.csv')
+df = pd.read_csv('data\marketing_sample_for_walmart_com-walmart_product_reviews__20200401_20200630__30k_data.csv')
 
-# Mapping labels to numerical values
-df['sentiment'] = df['sentiment'].map({'positive': 1, 'negative': 0})
+# Restrict the DataFrame to 'Rating' and 'Review' columns
+df = df[['Rating', 'Review']]
 
-# Remove <br /><br /> from reviews using regular expression
-df['review'] = df['review'].apply(lambda x: re.sub(r'<br /><br />', '', x))
+# Rename the 'Rating' column to 'labels'
+df = df.rename(columns={'Rating': 'labels'})
+df = df.rename(columns={'Review': 'review'})
+
+# Remove rows where 'Review' is NaN
+df = df.dropna(subset=['review'])
+
+# Count the number of samples for each class
+class_counts = df['labels'].value_counts()
+
+# Determine the minimum class count
+min_class_count = class_counts.min()
+
+# Sample an equal number of reviews from each class
+balanced_df = df.groupby('labels').apply(lambda x: x.sample(n=min_class_count)).reset_index(drop=True)
 
 # Shuffle the DataFrame
-df = df.sample(frac=1).reset_index(drop=True)
-
-# Restrict the DataFrame to 10,000 samples while maintaining balanced classes
-df_balanced = pd.concat([df[df['sentiment'] == 1].head(5000), df[df['sentiment'] == 0].head(5000)])
-
-# Shuffle the DataFrame
-df_balanced = df_balanced.sample(frac=1).reset_index(drop=True)
+balanced_df = balanced_df.sample(frac=1).reset_index(drop=True)
 
 # Save the processed data to a pickle file
-df_balanced.to_pickle('data/processed_IMDB_Dataset.pkl')
+balanced_df.to_pickle('data/walmart_processed.pkl')
 
-# Display the first few rows of the processed dataset
-print(df_balanced.head())
+# Display the first few rows of the balanced dataset
+print(balanced_df.head())
 
+
+# Number of rows in the original DataFrame
+print("Original DataFrame rows:", df.shape[0])
+
+# Number of rows in the balanced DataFrame
+print("Balanced DataFrame rows:", balanced_df.shape[0])

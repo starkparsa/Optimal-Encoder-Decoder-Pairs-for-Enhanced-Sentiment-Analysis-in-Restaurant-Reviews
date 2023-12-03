@@ -1,6 +1,6 @@
 import pandas as pd
 from decoders.svm import SVMClassifier
-from decoders.logistic_regression_classifier import LogisticRegressionClassifier
+from decoders.logistic_regression import LogisticRegressionClassifier
 import numpy as np
 import pickle
 
