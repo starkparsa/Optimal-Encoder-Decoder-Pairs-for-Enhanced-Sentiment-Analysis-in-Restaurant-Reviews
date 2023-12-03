@@ -1,14 +1,36 @@
 import pandas as pd
 
-# Load the dataset
-df = pd.read_csv('data\marketing_sample_for_walmart_com-walmart_product_reviews__20200401_20200630__30k_data.csv')
+# Specify the path to the Yelp Academic Dataset's review data in JSON format
+json_file_path = 'data/yelp_academic_dataset_review.json'
+
+# Create an empty DataFrame to store the chunks
+df_list = []
+
+# Read JSON file in chunks and append to the list
+chunk_size = 10000
+desired_records = 50000
+records_read = 0
+
+chunks = pd.read_json(json_file_path, lines=True, chunksize=chunk_size)
+
+for chunk in chunks:
+    df_list.append(chunk)
+    records_read += chunk.shape[0]
+
+    # Break the loop if the desired number of records is reached
+    if records_read >= desired_records:
+        break
+
+# Concatenate the list of chunks into a single DataFrame
+df = pd.concat(df_list, ignore_index=True)
+
 
 # Restrict the DataFrame to 'Rating' and 'Review' columns
-df = df[['Rating', 'Review']]
+df = df[['business_id', 'stars', 'text']]
 
 # Rename the 'Rating' column to 'labels'
-df = df.rename(columns={'Rating': 'labels'})
-df = df.rename(columns={'Review': 'review'})
+df = df.rename(columns={'stars': 'labels'})
+df = df.rename(columns={'text': 'review'})
 
 # Remove rows where 'Review' is NaN
 df = df.dropna(subset=['review'])
@@ -25,15 +47,13 @@ balanced_df = df.groupby('labels').apply(lambda x: x.sample(n=min_class_count)).
 # Shuffle the DataFrame
 balanced_df = balanced_df.sample(frac=1).reset_index(drop=True)
 
-# Save the processed data to a pickle file
-balanced_df.to_pickle('data/walmart_processed.pkl')
+# Continue with your data processing steps (e.g., renaming columns, balancing classes, etc.)
 
-# Display the first few rows of the balanced dataset
+# Save the processed data to a pickle file or another format
+balanced_df.to_pickle('data/yelp_processed.pkl')
+
+# Display the first few rows of the processed dataset
 print(balanced_df.head())
 
-
-# Number of rows in the original DataFrame
-print("Original DataFrame rows:", df.shape[0])
-
-# Number of rows in the balanced DataFrame
-print("Balanced DataFrame rows:", balanced_df.shape[0])
+# Number of rows in the processed DataFrame
+print("Processed DataFrame rows:", balanced_df.shape[0])

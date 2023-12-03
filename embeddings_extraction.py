@@ -6,7 +6,7 @@ from encoders.T5 import T5Embedder
 from encoders.word2vec import Word2VecEmbedder
 from encoders.XLNet import XLNetEmbedder
 
-file_path = 'data/walmart_processed.pkl'
+file_path = 'data\yelp_processed.pkl'
 
 #####################################################
 #                        # BART #
@@ -24,7 +24,7 @@ bart_embedder = BartEmbedder()
 df['bart_embeddings'] = df['review'].apply(bart_embedder.get_embeddings)
 
 # Save the processed data to a pickle file
-df.to_pickle('embeddings/walmart_BART_embeddings.pkl')
+df.to_pickle('embeddings\yelp_BART_embeddings.pkl')
 
 # Display the first few rows of the processed dataset
 print(df.head())
@@ -45,7 +45,7 @@ bert_embedder = BertEmbedder()
 df['bert_embeddings'] = df['review'].apply(bert_embedder.get_embeddings)
 
 # Save the processed data to a pickle file
-df.to_pickle('embeddings/walmart_BERT_embeddings.pkl')
+df.to_pickle('embeddings\yelp_BERT_embeddings.pkl')
 
 # Display the first few rows of the processed dataset
 print(df.head())
@@ -63,7 +63,7 @@ t5_embedder = T5Embedder()
 df['t5_embeddings'] = df['review'].apply(t5_embedder.get_embeddings)
 
 # Save the processed data to a pickle file
-df.to_pickle('embeddings/walmart_T5_embeddings.pkl')
+df.to_pickle('embeddings\yelp_T5_embeddings.pkl')
 
 # Display the first few rows of the processed dataset
 print(df.head())
@@ -81,7 +81,7 @@ ernie_embedder = ErnieEmbedder()
 df['ernie_embeddings'] = df['review'].apply(ernie_embedder.get_embeddings)
 
 # Save the processed data to a pickle file
-df.to_pickle('embeddings/walmart_ERNIE_embeddings.pkl')
+df.to_pickle('embeddings\yelp_ERNIE_embeddings.pkl')
 
 # Display the first few rows of the processed dataset
 print(df.head())
@@ -99,7 +99,7 @@ xlnet_embedder = XLNetEmbedder()
 df['xlnet_embeddings'] = df['review'].apply(xlnet_embedder.get_embeddings)
 
 # Save the processed data to a pickle file
-df.to_pickle('embeddings/walmart_XLNet_embeddings.pkl')
+df.to_pickle('embeddings\yelpt_XLNet_embeddings.pkl')
 
 # Display the first few rows of the processed dataset
 print(df.head())
