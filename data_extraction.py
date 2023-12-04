@@ -8,7 +8,7 @@ df_list = []
 
 # Read JSON file in chunks and append to the list
 chunk_size = 10000
-desired_records = 50000
+desired_records = 30000
 records_read = 0
 
 chunks = pd.read_json(json_file_path, lines=True, chunksize=chunk_size)
