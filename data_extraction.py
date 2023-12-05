@@ -8,7 +8,7 @@ df_list = []
 
 # Read JSON file in chunks and append to the list
 chunk_size = 10000
-desired_records = 10000
+desired_records = 20000
 records_read = 0
 
 chunks = pd.read_json(json_file_path, lines=True, chunksize=chunk_size)
@@ -39,7 +39,7 @@ df = df.dropna(subset=['review'])
 class_counts = df['labels'].value_counts()
 
 # Determine the minimum class count
-min_class_count = class_counts.min()
+min_class_count = 1000
 
 # Sample an equal number of reviews from each class
 balanced_df = df.groupby('labels').apply(lambda x: x.sample(n=min_class_count)).reset_index(drop=True)
