@@ -3,8 +3,8 @@ from transformers import BartTokenizer, BartModel
 
 class BartEmbedder:
     def __init__(self):
-        self.tokenizer = BartTokenizer.from_pretrained('facebook/bart-large')
-        self.model = BartModel.from_pretrained('facebook/bart-large')
+        self.tokenizer = BartTokenizer.from_pretrained('facebook/bart-base')
+        self.model = BartModel.from_pretrained('facebook/bart-base')
         self.model.eval()  # Set the model to evaluation mode
 
     def get_embeddings(self, sentence):
