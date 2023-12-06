@@ -22,7 +22,7 @@ class SVMClassifier:
         # Convert the results to a DataFrame
         results_df = pd.DataFrame(self.results)
 
-        # Save the DataFrame to a CSV file
-        results_df.to_csv(filename, index=False)
+        # Save the DataFrame to a pickle file
+        results_df.to_pickle(filename)
 
         print(f"Results saved to {filename}")

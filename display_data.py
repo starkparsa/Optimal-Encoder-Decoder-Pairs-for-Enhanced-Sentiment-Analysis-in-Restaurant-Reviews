@@ -33,10 +33,10 @@ def plot_accuracy_table(encoder_name, decoder_name, accuracy_data):
     plt.show()
 
 def main():
-    folder_path = 'path/to/your/files'  # Change this to the folder containing your pickle files
+    folder_path = 'results'  # Change this to the folder containing your pickle files
 
     for file_name in os.listdir(folder_path):
-        match = re.match(r'yelp_(bert|word2vec|bart|T5)_(random_forest|SVM|cnn|mlp|logistic_regression|gradient_boosting).pkl', file_name)
+        match = re.match(r'yelp_(BERT|word2vec|BART|T5)_(Random_Forest|SVM|CNN|MLP|logistic_regression|Gradient_Boosting).pkl', file_name)
         if file_name.endswith('.pkl') and match:
             encoder_name, decoder_name = match.groups()
             file_path = os.path.join(folder_path, file_name)

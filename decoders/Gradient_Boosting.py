@@ -6,7 +6,7 @@ from sklearn.metrics import accuracy_score, classification_report
 import pickle
 
 class GradientBoostingClassifierWrapper:
-    def __init__(self, n_estimators=30, learning_rate=0.1, max_depth=3, random_state=42):
+    def __init__(self, n_estimators=10, learning_rate=0.1, max_depth=3, random_state=42):
         self.model = GradientBoostingClassifier(n_estimators=n_estimators, learning_rate=learning_rate, max_depth=max_depth, random_state=random_state)
         self.results = {'classification_report': []}
 
@@ -33,7 +33,7 @@ class GradientBoostingClassifierWrapper:
         # Convert the results to a DataFrame
         results_df = pd.DataFrame(self.results)
 
-        # Save the DataFrame to a CSV file
-        results_df.to_csv(filename, index=False)
+        # Save the DataFrame to a pickle file
+        results_df.to_pickle(filename)
 
         print(f"Results saved to {filename}")

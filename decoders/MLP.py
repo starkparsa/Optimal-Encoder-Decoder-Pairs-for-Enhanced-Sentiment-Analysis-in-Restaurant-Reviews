@@ -14,7 +14,7 @@ class MLPClassifier:
         self.model.add(Dense(64, activation='relu', input_dim=input_dim))  # You can adjust the number of neurons in the hidden layer
         self.model.add(Dense(32, activation='relu'))  # You can add more hidden layers if needed
         self.model.add(Dense(output_dim, activation='sigmoid'))
-        self.model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+        self.model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
         self.results = {'classification_report': []}
 
     def train(self, X, y):
@@ -41,7 +41,7 @@ class MLPClassifier:
         # Convert the results to a DataFrame
         results_df = pd.DataFrame(self.results)
 
-        # Save the DataFrame to a CSV file
-        results_df.to_csv(filename, index=False)
+        # Save the DataFrame to a pickle file
+        results_df.to_pickle(filename)
 
         print(f"Results saved to {filename}")
