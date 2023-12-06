@@ -7,3 +7,15 @@ For now, this behavior is kept to avoid breaking backwards compatibility when pa
   warnings.warn(
 You are using the default legacy behaviour of the <class 'transformers.models.t5.tokenization_t5.T5Tokenizer'>. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thouroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565
 Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Generated Word2Vec embeddings
+========================================
+
+Generated BERT embeddings
+========================================
+
+Generated BART embeddings
+========================================
+
+Generated T5 embeddings
+========================================
+
