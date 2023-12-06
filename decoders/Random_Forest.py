@@ -6,7 +6,7 @@ from sklearn.metrics import accuracy_score, classification_report
 import pickle
 
 class RandomForestClassifierWrapper:
-    def __init__(self, n_estimators=100, max_depth=None, random_state=None):
+    def __init__(self, n_estimators=30, max_depth=3, random_state=42):
         self.model = RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth, random_state=random_state)
         self.results = {'classification_report': []}
 
@@ -28,6 +28,7 @@ class RandomForestClassifierWrapper:
 
     def predict(self, X):
         return self.model.predict(X)
+    
 
     def save_results(self, filename):
         # Convert the results to a DataFrame

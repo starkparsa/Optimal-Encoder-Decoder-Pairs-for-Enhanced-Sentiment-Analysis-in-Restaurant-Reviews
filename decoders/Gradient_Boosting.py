@@ -6,7 +6,7 @@ from sklearn.metrics import accuracy_score, classification_report
 import pickle
 
 class GradientBoostingClassifierWrapper:
-    def __init__(self, n_estimators=100, learning_rate=0.1, max_depth=3, random_state=None):
+    def __init__(self, n_estimators=30, learning_rate=0.1, max_depth=3, random_state=42):
         self.model = GradientBoostingClassifier(n_estimators=n_estimators, learning_rate=learning_rate, max_depth=max_depth, random_state=random_state)
         self.results = {'classification_report': []}
 

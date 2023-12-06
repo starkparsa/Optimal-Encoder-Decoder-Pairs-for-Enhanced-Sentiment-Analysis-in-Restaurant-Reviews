@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Specify the path to the Yelp Academic Dataset's review data in JSON format
 json_file_path = 'data/yelp_academic_dataset_review.json'
@@ -34,6 +35,14 @@ df = df.rename(columns={'text': 'review'})
 
 # Remove rows where 'Review' is NaN
 df = df.dropna(subset=['review'])
+
+
+plt.hist(df['labels'], bins=5, edgecolor='black')  # Adjust the number of bins as needed
+plt.title('Distribution of Ratings')
+plt.xlabel('Rating')
+plt.ylabel('Frequency')
+plt.show()
+
 
 # Count the number of samples for each class
 class_counts = df['labels'].value_counts()

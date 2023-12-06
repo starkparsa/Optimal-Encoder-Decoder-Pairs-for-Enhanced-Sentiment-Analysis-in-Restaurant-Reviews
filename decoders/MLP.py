@@ -7,6 +7,7 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import pickle
 
+
 class MLPClassifier:
     def __init__(self, input_dim, output_dim=1):
         self.model = Sequential()
@@ -20,7 +21,7 @@ class MLPClassifier:
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
         # Training the model
-        self.model.fit(X_train, y_train, epochs=5, batch_size=32, validation_data=(X_test, y_test))
+        self.model.fit(X_train, y_train, epochs=50, batch_size=32, validation_data=(X_test, y_test))
 
         # Make predictions on the test set
         y_pred_prob = self.predict(X_test)
