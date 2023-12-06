@@ -5,7 +5,7 @@ import numpy as np
 import pickle
 
 # Load data from a pickle file
-file_path = 'embddings/Word2Ve_base_IMDB_Embeddings.pkl'
+file_path = 'embeddings/Word2Ve_base_IMDB_Embeddings.pkl'
 df = pd.read_pickle(file_path)
 
 

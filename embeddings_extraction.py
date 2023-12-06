@@ -1,18 +1,28 @@
 import pandas as pd
-from concurrent.futures import ThreadPoolExecutor  # Use ThreadPoolExecutor for IO-bound tasks
-
+import spacy
+from concurrent.futures import ThreadPoolExecutor
 from encoders.BART import BartEmbedder
 from encoders.BERT import BertEmbedder
 from encoders.T5 import T5Embedder
 from encoders.word2vec import Word2VecEmbedder
 
+def download_spacy_model():
+    # Download spaCy English model
+    spacy.cli.download("en_core_web_md")
+
 def process_model(model_name, embedder_class, df):
-    embedder = embedder_class()
-    df[f'{model_name.lower()}_embeddings'] = df['review'].apply(embedder.get_embeddings)
-    df.to_pickle(f'embeddings/yelp_{model_name}_embeddings.pkl')
-    print(f"Generated {model_name} embeddings\n{'='*40}\n")
+    try:
+        embedder = embedder_class()
+        df[f'{model_name.lower()}_embeddings'] = df['review'].apply(embedder.get_embeddings)
+        df.to_pickle(f'embeddings/yelp_{model_name}_embeddings.pkl')
+        print(f"Generated {model_name} embeddings\n{'='*40}\n")
+    except Exception as e:
+        print(f"Error processing {model_name}: {e}")
 
 def main():
+    # Download spaCy model before processing
+    download_spacy_model()
+
     file_path = 'data/yelp_processed.pkl'
 
     # Read the pickle file into a DataFrame once
