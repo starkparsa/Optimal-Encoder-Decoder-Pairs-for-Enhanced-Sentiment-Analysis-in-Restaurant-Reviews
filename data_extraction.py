@@ -39,7 +39,7 @@ df = df.dropna(subset=['review'])
 class_counts = df['labels'].value_counts()
 
 # Determine the minimum class count
-min_class_count = 300
+min_class_count = 600
 
 # Sample an equal number of reviews from each class
 balanced_df = df.groupby('labels').apply(lambda x: x.sample(n=min_class_count)).reset_index(drop=True)
