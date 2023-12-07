@@ -37,11 +37,21 @@ df = df.rename(columns={'text': 'review'})
 df = df.dropna(subset=['review'])
 
 
-plt.hist(df['labels'], bins=5, edgecolor='black')  # Adjust the number of bins as needed
+import matplotlib.pyplot as plt
+
+# Assuming df is your DataFrame with a 'labels' column
+plt.hist(df['labels'], bins=[0.5, 1.5, 2.5, 3.5, 4.5, 5.5], edgecolor='black', align='mid', rwidth=0.8)  # Adjust the bin edges and other parameters as needed
 plt.title('Distribution of Ratings')
-plt.xlabel('Rating')
+plt.xlabel('Ratings')
 plt.ylabel('Frequency')
+plt.xticks(range(1, 6))  # Adjust the range based on your label values
 plt.show()
+
+# Save the histogram as an image file (e.g., PNG)
+plt.savefig('results/histogram.png')
+
+plt.show()
+
 
 
 # Count the number of samples for each class

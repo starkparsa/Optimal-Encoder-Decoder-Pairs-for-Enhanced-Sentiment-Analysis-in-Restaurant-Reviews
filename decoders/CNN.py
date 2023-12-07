@@ -4,9 +4,9 @@ from tensorflow.keras.layers import Conv1D, GlobalMaxPooling1D, Dense
 from tensorflow.keras.utils import to_categorical
 import numpy as np
 import pandas as pd
+import pickle
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
-
 
 class CNNClassifier:
     def __init__(self, input_dim, filters=128, kernel_size=5, hidden_units=128, output_units=5):
@@ -17,7 +17,7 @@ class CNNClassifier:
             Dense(output_units, activation='softmax')
         ])
         self.model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-        self.results = {'classification_report': []}
+        self.results = {'overall_metrics': None}
 
     def train(self, X, y, epochs=50, test_size=0.2, random_state=42):
         # Assuming X is a 3D array (number of samples, sequence length, features)
@@ -42,21 +42,20 @@ class CNNClassifier:
         y_pred_labels = np.argmax(y_pred, axis=1) + 1
 
         # Evaluate the model
-        report = classification_report(np.argmax(y_test, axis=1) + 1, y_pred_labels)
+        report = classification_report(np.argmax(y_test, axis=1) + 1, y_pred_labels, output_dict=True)
 
         # Save results
-        self.results['classification_report'].append(report)
+        self.results['overall_metrics'] = report
 
     def predict(self, X):
         X = np.expand_dims(X, axis=-1)  # Add a channel dimension
         return self.model.predict(X)
 
     def save_results(self, filename):
-        # Convert the results to a DataFrame
-        results_df = pd.DataFrame(self.results)
-
-        # Save the DataFrame to a pickle file
-        results_df.to_pickle(filename)
+        # Save only the overall metrics as a pickle file
+        with open(filename, 'wb') as file:
+            pickle.dump(self.results['overall_metrics'], file)
 
         print(f"Results saved to {filename}")
+
 

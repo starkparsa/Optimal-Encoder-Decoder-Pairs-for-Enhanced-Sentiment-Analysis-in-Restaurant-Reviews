@@ -1,50 +1,35 @@
-import os
 import pandas as pd
+from pathlib import Path
 import pickle
-import re
-import matplotlib.pyplot as plt
 
-def extract_metrics_from_pickle(file_path):
-    with open(file_path, 'rb') as file:
-        report_dict = pickle.load(file)
+# Sample data for demonstration purposes (replace this with your actual data)
+file_format = 'yelp_{}_{}.pkl'
+encoders = ['Word2Vec', 'BERT', 'BART', 'T5']
+decoders = ['logistic_regression', 'svm', 'mlp', 'cnn', 'gradient_boosting', 'random_forest']
 
-    # Extracting metrics values
-    metrics_values = {
-        'precision': report_dict['precision'],
-        'recall': report_dict['recall'],
-        'f1-score': report_dict['f1-score'],
-        'support': report_dict['support'],
-        'accuracy': report_dict['accuracy']
-    }
+# Create a DataFrame to store accuracy values
+accuracy_data = pd.DataFrame(index=encoders, columns=decoders)
 
-    return metrics_values
+for encoder in encoders:
+    for decoder in decoders:
+        file_path = Path('results') / file_format.format(encoder, decoder)
+        
+        try:
+            with open(file_path, 'rb') as file:
+                results_data = pickle.load(file)
 
-def plot_accuracy_table(encoder_name, decoder_name, accuracy_data):
-    df = pd.DataFrame(accuracy_data, columns=[f'{decoder_name}'])
-    
-    # Plotting the table
-    ax = pd.plotting.table(data=df, loc='center', colWidths=[0.1] * len(df.columns))
-    ax.axis('off')  # Hide the axes
+            # Assuming 'accuracy' is a key within the dictionary
+            accuracy_value = results_data.get('accuracy', None)
 
-    # Add a title
-    ax.set_title(f'Accuracy Table - {encoder_name} + {decoder_name}')
+            accuracy_data.loc[encoder, decoder] = accuracy_value
+        except FileNotFoundError:
+            print(f"File not found: {file_path}")
 
-    # Show the table
-    plt.show()
+# Display the table
+print("\nAccuracy Table:\n")
+print(accuracy_data)
 
-def main():
-    folder_path = 'results'  # Change this to the folder containing your pickle files
-
-    for file_name in os.listdir(folder_path):
-        match = re.match(r'yelp_(BERT|word2vec|BART|T5)_(Random_Forest|SVM|CNN|MLP|logistic_regression|Gradient_Boosting).pkl', file_name)
-        if file_name.endswith('.pkl') and match:
-            encoder_name, decoder_name = match.groups()
-            file_path = os.path.join(folder_path, file_name)
-
-            metrics_values = extract_metrics_from_pickle(file_path)
-            accuracy_data = [metrics_values['accuracy']]
-
-            plot_accuracy_table(encoder_name, decoder_name, accuracy_data)
-
-if __name__ == "__main__":
-    main()
+# Save the DataFrame to a CSV file
+csv_filename = 'results/accuracy_table.csv'
+accuracy_data.to_csv(csv_filename)
+print(f"Accuracy table saved to {csv_filename}")
