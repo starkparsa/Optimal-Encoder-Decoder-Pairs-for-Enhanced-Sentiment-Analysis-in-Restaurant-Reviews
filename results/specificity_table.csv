@@ -1,0 +1,5 @@
+,logistic_regression,svm,mlp,cnn,gradient_boosting,random_forest
+Word2Vec,,,,,,
+BERT,,,,,,
+BART,,,,,,
+T5,,,,,,
