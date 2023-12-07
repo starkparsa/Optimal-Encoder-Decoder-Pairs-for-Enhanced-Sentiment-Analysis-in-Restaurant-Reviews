@@ -41,11 +41,11 @@ def main():
 
     classifiers = [
         (LogisticRegressionClassifier, 'logistic_regression'),
-        (SVMClassifier, 'svm'),
-        (MLPClassifier, 'mlp'),
-        (CNNClassifier, 'cnn'),
-        (GradientBoostingClassifierWrapper, 'gradient_boosting'),
-        (RandomForestClassifierWrapper, 'random_forest')
+        # (SVMClassifier, 'svm'),
+        # (MLPClassifier, 'mlp'),
+        # (CNNClassifier, 'cnn'),
+        # (GradientBoostingClassifierWrapper, 'gradient_boosting'),
+        # (RandomForestClassifierWrapper, 'random_forest')
     ]
 
     for embedding_type, column_name in embeddings_list:

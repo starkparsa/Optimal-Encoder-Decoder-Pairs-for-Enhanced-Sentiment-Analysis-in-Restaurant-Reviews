@@ -8,7 +8,7 @@ import pickle
 class LogisticRegressionClassifier:
     def __init__(self, input_dim=None):
         self.model = LogisticRegression()
-        self.results = {'overall_metrics': None, 'accuracy': None}
+        self.results = {'overall_metrics': None, 'accuracy': None, 'f1-score': None, 'precision': None, 'recall': None, 'weighted avg': None}
 
     def train(self, X, y):
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -22,6 +22,12 @@ class LogisticRegressionClassifier:
         # Calculate and save accuracy
         accuracy = accuracy_score(y_test, y_pred)
         self.results['accuracy'] = accuracy
+        
+        # Save f1-score, precision, recall, and weighted avg
+        self.results['f1-score'] = report['weighted avg']['f1-score']
+        self.results['precision'] = report['weighted avg']['precision']
+        self.results['recall'] = report['weighted avg']['recall']
+        self.results['weighted avg'] = report['weighted avg']
 
     def predict(self, X):
         return self.model.predict(X)
