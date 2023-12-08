@@ -45,7 +45,6 @@ plt.title('Distribution of Ratings')
 plt.xlabel('Ratings')
 plt.ylabel('Frequency')
 plt.xticks(range(1, 6))  # Adjust the range based on your label values
-plt.show()
 
 # Save the histogram as an image file (e.g., PNG)
 plt.savefig('results/histogram.png')
