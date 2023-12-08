@@ -1,7 +1,7 @@
-# import data_extraction
-# import embeddings_extraction
-# import results_extraction
-# import display_data
+import data_extraction
+import embeddings_extraction
+import results_extraction
+import display_data
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -33,7 +33,7 @@ class SVMClassifier:
             writer = csv.writer(file)
             writer.writerow(["Class", "Precision", "Recall", "F1-Score", "Support"])
             for class_label, metrics in self.results['classification_report'].items():
-                if class_label.isnumeric():  # Exclude non-numeric labels (e.g., 'accuracy')
+                if class_label.isnumeric():
                     writer.writerow([class_label, metrics['precision'], metrics['recall'], metrics['f1-score'], metrics['support']])
 
         print(f"Results saved to {filename}")
