@@ -1,4 +1,5 @@
-# Strategies for Elevated Accuracy:Optimizing Sentiment Analysis with Restaurant Reviews
+# Fine-Tuning Encoder-Decoder Pairs for Enhanced Sentiment Analysis in Restaurant Reviews
+
 
 ## Overview
 This project focuses on sentiment analysis of Yelp reviews and utilizes various natural language processing techniques to recommend whether a user should visit a restaurant based on the sentiment expressed in the reviews. The sentiment analysis is performed using state-of-the-art embedding models like BERT, BART, and others. The processed data is then used to train and evaluate machine learning classifiers such as Support Vector Machines (SVM) and Logistic Regression.
