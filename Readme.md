@@ -34,12 +34,7 @@ This project focuses on sentiment analysis of Yelp reviews and utilizes various 
 - Ensure that spaCy models are downloaded using the provided `download_spacy_model` function.
 
 ## How to Run
-1. Run the data extraction script to extract and process Yelp review data: `python data_extraction.py`.
-2. Visualize the distribution of ratings using the histogram script: `python histogram.py`.
-3. Extract embeddings from different models using the embeddings extraction script: `python embeddings_extraction.py`.
-4. Train and evaluate machine learning models using the training script: `python training.py`.
-5. Analyze and visualize the results using the results analysis script: `python results_analysis.py`.
-6. Use the model inference script to make predictions on a sample restaurant review: `python model_inference.py`.
+1. Run the main file: "python3 main.py".
 
 ## Project Contributors
 - Venkata Vaibhav Parasa(vvp23)

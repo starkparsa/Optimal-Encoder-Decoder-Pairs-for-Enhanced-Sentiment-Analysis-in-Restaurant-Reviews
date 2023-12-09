@@ -45,7 +45,4 @@ class MLPClassifier:
 
         print(f"Results saved to {filename}")
 
-# Example usage:
-# mlp_classifier = MLPClassifier(input_dim=your_input_dim)
-# mlp_classifier.train(X_train, y_train)
-# mlp_classifier.save_results('mlp_results.pkl')
+
